@@ -60,7 +60,7 @@ int main()
         cout<<"\nPLAYER 1 Press 1 to roll dice: ";
         cin>>input_p1;
 
-        roll1=dice(); //Roll 6 to free gotti
+        roll1=6; //Roll 6 to free gotti
         cout<<"\nNumber rolled is "<<roll1<<endl<<endl;
 
         if(roll1==6)
@@ -91,6 +91,8 @@ int main()
 
     cout<<"\nPress 1 to roll dice: ";
 
+    int winner = 0;
+
     while(cin>>input_p1 || cin>>input_p2)
     {
         if(roll1==6)
@@ -102,11 +104,21 @@ int main()
             for(int i = 0; i < roll; i++)
             {
                 check_turn1(posi, posj);
+                if(posi == 12 && posj == 7 && roll == 6 || posi == 12 && posj == 6 && roll == 5 || posi == 11 && posj == 6 && roll == 4 || posi == 10 && posj == 6 && roll == 3 || posi == 9 && posj == 6 && roll == 2 || posi == 8 && posj == 6 && roll == 1)
+                {
+                    winner = 1; cout << "WINNER: PLAYER 1\n\n"; break;
+                }
+
                 //cout << posi << " " << posj << endl;
             }
+
             ludo[posi][posj] = "1";
 
             PrintBoard(ludo, posi, posj);
+
+            if(winner == 1){break;}
+
+
             cout<<endl<<endl;
             cout<<"Press 1 to roll dice: ";
         }
@@ -121,8 +133,11 @@ int main()
             {
                 check_turn2(posx, posy);
                 //cout << posx << " " << posy << endl;
+
             }
+
             ludo[posx][posy] = "2";
+
 
             PrintBoard(ludo, posx, posy);
             cout<<endl<<endl;
@@ -290,6 +305,8 @@ void check_turn2(int& x, int& y)
         x++;
     }
     else {x--;}
+
+
 }
 
 int dice() //Simulates dice roll
